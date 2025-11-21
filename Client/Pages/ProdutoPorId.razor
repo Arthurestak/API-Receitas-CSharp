@@ -1,0 +1,55 @@
+@page "/ProdutoPorId";
+@inject HttpClient httpClient;
+
+@using ProjetoBlazorAPI.Shared;
+
+<div class="container-sm mt-2 d-flex flex-column align-center justify-center text-center col-8">
+    <div class="card p-3 text-center">
+    <h2 class="text-primary mt-3">Consultar Receita por ID</h2>
+        @* <EditForm Model="@produto" @OnSubmit="ConsumirApi"> *@
+            <label class="text-muted">Digite o ID do Produto:</label>
+            <input type="number" class="form-control mt-2" @bind-value=idDigitado>
+            @* <InputNumber TValue="int" @bind-Value="idDigitado" class="form-control"></InputNumber> *@
+            <button class="btn btn-outline-primary" @onclick="ConsumirApi">Procurar</button>
+        @* </EditForm> *@
+    </div>
+</div>
+
+    <h2 class="text-primary text-center mt-3">@produto.name</h2>
+    <div class="container-sm mt-2 d-flex align-center justify-content-sm-between col-6">
+        <div class="card border-0 shadow p-2 mt-2 col-6 text-center">
+            <h5 class="text-muted">ID:</h5>
+            <p class="text-primary">@produto.id</p>
+            <h5 class="text-muted">Nome:</h5>
+            <p class="text-primary">@produto.name</p>    
+            <h5 class="text-muted">Tempo de preparo:</h5>
+            <p class="text-primary">@produto.prepTimeMinutes minutos</p>
+            <h5 class="text-muted">Tempo de cozimento:</h5>    
+            <p class="text-primary">@produto.cookTimeMinutes minutos</p>
+        </div>
+        <div class="card border-0 shadow p-2 mt-2 col-6 text-center">
+            <h5 class="text-muted">Calorias por porção:</h5>    
+            <p class="text-primary">@produto.caloriesPerServing Kcal</p>
+            <h5 class="text-muted">Avaliação:</h5>
+            <p class="text-primary">@produto.rating⭐</p>
+            <h5 class="text-muted">Serve:</h5>
+            <p class="text-primary">@produto.servings pessoas</p>    
+            <h5 class="text-muted">Dificuldade:</h5>
+            <p class="text-primary">@produto.difficulty</p>
+        </div>
+</div>
+@code{
+    int idDigitado;
+
+    
+    Produto? produto = new();
+
+    private async Task ConsumirApi(){
+       var response = await httpClient.GetAsync($"https://dummyjson.com/recipes/{idDigitado}");
+
+       if (response.IsSuccessStatusCode){
+            produto = await response.Content.ReadFromJsonAsync<Produto>();
+       }
+    }
+
+}

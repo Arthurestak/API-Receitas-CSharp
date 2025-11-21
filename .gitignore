@@ -1,0 +1,60 @@
+### .NET ###
+bin/
+obj/
+**/bin/
+**/obj/
+*.user
+*.rsuser
+*.suo
+*.cache
+*.pdb
+*.mdb
+*.log
+*.ilk
+*.tmp
+*.svclog
+*.UserPrefs
+
+# Arquivos de lock / output temporário
+project.lock.json
+project.fragment.lock.json
+
+# Diretórios de publicação
+publish/
+**/publish/
+**/Release/
+**/Debug/
+
+# Pacotes NuGet baixados
+# (não suba EVER!)
+*.nupkg
+*.snupkg
+packages/
+*.nuget
+/.nuget/
+
+# VS
+.vs/
+.vscode/
+*.dbmdl
+*.jfm
+*.opendb
+
+# Ferramentas
+node_modules/
+wwwroot/node_modules/
+dist/
+temp/
+tmp/
+
+### Blazor ###
+wwwroot/css/**/*.map
+wwwroot/js/**/*.map
+
+### Sistema Operacional ###
+.DS_Store
+Thumbs.db
+
+### Logs ###
+*.log
+logs/
